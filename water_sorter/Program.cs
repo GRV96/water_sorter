@@ -6,7 +6,11 @@ namespace water_sorter
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            String puzzlePath = args[0];
+            String solutionPath = args[1];
+
+            Console.WriteLine("Puzzle: {0}", puzzlePath);
+            Console.WriteLine("Solution: {0}", solutionPath);
         }
     }
 }
