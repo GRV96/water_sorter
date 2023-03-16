@@ -1,0 +1,19 @@
+﻿# Example source: https://www.silvergames.com/en/water-sort
+
+# DB: dark blue
+# LG: light green
+# Or: orange
+# Pi: pink
+# Re: red
+# -: empty bottle
+
+Pi DB LG Or
+Re Or Re Pi
+DB Re LG LG
+Pi DB Or LG
+
+# Empty linges are ignored
+
+BD Re Pi Or
+-
+-
