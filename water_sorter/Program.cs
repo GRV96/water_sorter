@@ -40,11 +40,7 @@ namespace water_sorter
                 colors.Insert(0, bottleCopy.Pop());
             }
 
-            string line = "";
-            foreach (string color in colors)
-            {
-                line += color + STR_SPACE;
-            }
+            string line = string.Join(STR_SPACE, colors);
 
             return line;
         }
