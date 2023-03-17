@@ -1,8 +1,7 @@
 {
   "profiles": {
     "water_sorter": {
-      "commandName": "Project",
-      "commandLineArgs": "example.txt solution.txt"
+      "commandName": "Project"
     }
   }
 }

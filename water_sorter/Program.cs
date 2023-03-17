@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace water_sorter
@@ -18,24 +18,23 @@ namespace water_sorter
             Console.WriteLine("Puzzle: {0}", puzzlePath);
             Console.WriteLine("Solution: {0}", solutionPath);
 
-            // Error: paths are not relative to the solution.
-            ArrayList bottles = ReadPuzzle(puzzlePath);
+            List<Stack<string>> bottles = ReadPuzzle(puzzlePath);
             Console.WriteLine();
-            foreach(Stack bottle in bottles)
+            foreach(Stack<string> bottle in bottles)
             {
                 Console.WriteLine(BottleToLine(bottle));
             }
         }
 
-        private static string BottleToLine(Stack bottle)
+        private static string BottleToLine(Stack<string> bottle)
         {
             if (bottle.Count == 0)
             {
                 return STR_DASH;
             }
 
-            Stack bottleCopy = new Stack(bottle);
-            ArrayList colors = new ArrayList();
+            Stack<string> bottleCopy = new Stack<string>(bottle);
+            List<string> colors = new List<string>();
             while(bottleCopy.Count > 0)
             {
                 colors.Insert(0, bottleCopy.Pop());
@@ -50,9 +49,9 @@ namespace water_sorter
             return line;
         }
 
-        private static ArrayList ReadPuzzle(string puzzlePath)
+        private static List<Stack<string>> ReadPuzzle(string puzzlePath)
         {
-            ArrayList bottles = new ArrayList();
+            List<Stack<string>> bottles = new List<Stack<string>>();
 
             using (StreamReader reader = new StreamReader(puzzlePath))
             {
@@ -65,7 +64,7 @@ namespace water_sorter
                         continue;
                     }
 
-                    Stack bottle = ParsePuzzleLine(line);
+                    Stack<string> bottle = ParsePuzzleLine(line);
                     bottles.Add(bottle);
                 }
             }
@@ -73,9 +72,9 @@ namespace water_sorter
             return bottles;
         }
 
-        private static Stack ParsePuzzleLine(string puzzleLine)
+        private static Stack<string> ParsePuzzleLine(string puzzleLine)
         {
-            Stack bottle = new Stack();
+            Stack<string> bottle = new Stack<string>();
 
             if(puzzleLine != STR_DASH)
             {
