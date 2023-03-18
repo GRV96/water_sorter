@@ -3,7 +3,7 @@ using System.IO;
 
 namespace WaterSorter
 {
-    class FileIO
+    static class FileIO
     {
         private const char CH_SHARP = '#';
         private const string STR_DASH = "-";
