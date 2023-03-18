@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace WaterSorter
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string puzzlePath = args[0];
             string solutionPath = args[1];
 
-            Console.WriteLine("Puzzle: {0}", puzzlePath);
-            Console.WriteLine("Solution: {0}", solutionPath);
+            Console.WriteLine($"Puzzle: {puzzlePath}");
+            Console.WriteLine($"Solution: {solutionPath}");
 
             List<Stack<string>> bottles = FileIO.ReadPuzzle(puzzlePath);
             Console.WriteLine();

@@ -16,15 +16,8 @@ namespace WaterSorter
                 return STR_DASH;
             }
 
-            Stack<string> bottleCopy = new Stack<string>(bottle);
-            List<string> colors = new List<string>();
-            while (bottleCopy.Count > 0)
-            {
-                colors.Insert(0, bottleCopy.Pop());
-            }
-
+            string[] colors = bottle.ToArray();
             string line = string.Join(STR_SPACE, colors);
-
             return line;
         }
 
