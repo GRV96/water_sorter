@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "water_sorter": {
+    "WaterSorter": {
       "commandName": "Project"
     }
   }
