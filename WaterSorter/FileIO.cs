@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace water_sorter
+namespace WaterSorter
 {
     class FileIO
     {

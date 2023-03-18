@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace water_sorter
+namespace WaterSorter
 {
     class Program
     {
