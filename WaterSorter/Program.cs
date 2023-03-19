@@ -19,6 +19,13 @@ namespace WaterSorter
             {
                 Console.WriteLine(FileIO.BottleToLine(bottle));
             }
+
+            List<Move> moves = Solver.SolvePuzzle(bottles, 4);
+            Console.WriteLine();
+            foreach (Move move in moves)
+            {
+                Console.WriteLine(move);
+            }
         }
     }
 }
