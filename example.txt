@@ -12,8 +12,8 @@ Re Or Re Pi
 DB Re LG LG
 Pi DB Or LG
 
-# Empty linges are ignored
+# Empty lines are ignored
 
-BD Re Pi Or
+DB Re Pi Or
 -
 -

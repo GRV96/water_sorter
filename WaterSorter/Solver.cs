@@ -15,6 +15,26 @@ namespace WaterSorter
             ToIndex = toIndex;
         }
 
+        public override bool Equals(object obj)
+        {
+            Move other = null;
+            if(obj.GetType() == typeof(Move))
+            {
+                other = (Move) obj;
+            }
+            else
+            {
+                return false;
+            }
+
+            return this.FromIndex == other.FromIndex && this.ToIndex == other.ToIndex;
+        }
+
+        public bool IsReverseOf(Move other)
+        {
+            return this.FromIndex == other.ToIndex && this.ToIndex == other.FromIndex;
+        }
+
         public override string ToString()
         {
             return $"{FromIndex} -> {ToIndex}";
@@ -23,14 +43,8 @@ namespace WaterSorter
 
     static class Solver
     {
-        private static bool BottleFilledWithOneColor(Stack<string> bottle, int bottleSize)
+        private static bool BottleContainsOneColor(Stack<string> bottle)
         {
-            if(bottle.Count < bottleSize)
-            {
-                // The bottle is not filled.
-                return false;
-            }
-
             string prevColor = null;
             foreach (string color in bottle)
             {
@@ -52,19 +66,35 @@ namespace WaterSorter
             int nbBottles = bottles.Count;
             for (int i = 0; i < nbBottles; i++)
             {
+                Stack<string> bottleI = bottles[i];
+
                 for (int j = 1; j < nbBottles; j++)
                 {
-                    Stack<string> bottleI = bottles[i];
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
                     Stack<string> bottleJ = bottles[j];
 
                     if (MoveSeemsPossible(bottleI, bottleJ, bottleSize))
                     {
-                        possibleMoves.Add(new Move(i, j));
+                        Move move = new Move(i, j);
+                        Move prevMove = LastItemOfList(possibleMoves);
+                        if (prevMove == null || !move.IsReverseOf(prevMove))
+                        {
+                            possibleMoves.Add(move);
+                        }
                     }
 
                     if (MoveSeemsPossible(bottleJ, bottleI, bottleSize))
                     {
-                        possibleMoves.Add(new Move(j, i));
+                        Move move = new Move(j, i);
+                        Move prevMove = LastItemOfList(possibleMoves);
+                        if (prevMove == null || !move.IsReverseOf(prevMove))
+                        {
+                            possibleMoves.Add(move);
+                        }
                     }
                 }
             }
@@ -72,10 +102,21 @@ namespace WaterSorter
             return possibleMoves;
         }
 
+        private static T LastItemOfList<T>(List<T> someList)
+        {
+            int nbItems = someList.Count;
+            if (nbItems == 0)
+            {
+                return default(T);
+            }
+
+            return someList[nbItems - 1];
+        }
+
         private static bool MoveSeemsPossible(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
         {
             if(fromBottle.Count == 0 || toBottle.Count >= bottleSize
-                || BottleFilledWithOneColor(fromBottle, bottleSize))
+                || BottleContainsOneColor(fromBottle))
             {
                 return false;
             }
@@ -121,11 +162,11 @@ namespace WaterSorter
             return poured;
         }
 
-        private static bool PuzzleSolved(List<Stack<string>> bottles, int bottleSize)
+        private static bool PuzzleSolved(List<Stack<string>> bottles)
         {
             foreach(Stack<string> bottle in bottles)
             {
-                if (bottle.Count > 0 && !BottleFilledWithOneColor(bottle, bottleSize))
+                if (bottle.Count > 0 && !BottleContainsOneColor(bottle))
                 {
                     return false;
                 }
@@ -148,7 +189,7 @@ namespace WaterSorter
 
             if(possibleMoves.Count == 0)
             {
-                return PuzzleSolved(bottles, bottleSize);
+                return PuzzleSolved(bottles);
             }
 
             bool solved = false;
