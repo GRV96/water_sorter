@@ -43,8 +43,15 @@ namespace WaterSorter
 
     static class Solver
     {
-        private static bool BottleContainsOneColor(Stack<string> bottle)
+        private static bool BottleFilledWithOneColor(Stack<string> bottle, int bottleSize=0)
         {
+            if (bottleSize > 0 && bottle.Count < bottleSize)
+            {
+                // Return false if the bottle is not filled.
+                // To ignore this criteria, set bottleSize to 0 or less.
+                return false;
+            }
+
             string prevColor = null;
             foreach (string color in bottle)
             {
@@ -68,7 +75,7 @@ namespace WaterSorter
             {
                 Stack<string> bottleI = bottles[i];
 
-                for (int j = 1; j < nbBottles; j++)
+                for (int j = i + 1; j < nbBottles; j++)
                 {
                     if (i == j)
                     {
@@ -77,7 +84,7 @@ namespace WaterSorter
 
                     Stack<string> bottleJ = bottles[j];
 
-                    if (MoveSeemsPossible(bottleI, bottleJ, bottleSize))
+                    if (MoveMakesSense(bottleI, bottleJ, bottleSize))
                     {
                         Move move = new Move(i, j);
                         Move prevMove = LastItemOfList(possibleMoves);
@@ -87,7 +94,7 @@ namespace WaterSorter
                         }
                     }
 
-                    if (MoveSeemsPossible(bottleJ, bottleI, bottleSize))
+                    if (MoveMakesSense(bottleJ, bottleI, bottleSize))
                     {
                         Move move = new Move(j, i);
                         Move prevMove = LastItemOfList(possibleMoves);
@@ -113,15 +120,19 @@ namespace WaterSorter
             return someList[nbItems - 1];
         }
 
-        private static bool MoveSeemsPossible(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
+        private static bool MoveMakesSense(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
         {
-            if(fromBottle.Count == 0 || toBottle.Count >= bottleSize
-                || BottleContainsOneColor(fromBottle))
+            if (fromBottle.Count == 0 || toBottle.Count >= bottleSize)
             {
                 return false;
             }
 
-            if(toBottle.Count == 0)
+            if (toBottle.Count == 0 && BottleFilledWithOneColor(fromBottle))
+            {
+                return false;
+            }
+
+            if (toBottle.Count == 0)
             {
                 return true;
             }
@@ -150,7 +161,7 @@ namespace WaterSorter
             }
             else
             {
-                // The destination bottle does not have enough place for all the liquid.
+                // The destination bottle does not have enough room for all the liquid.
                 reciever = fromBottle;
             }
 
@@ -162,11 +173,11 @@ namespace WaterSorter
             return poured;
         }
 
-        private static bool PuzzleSolved(List<Stack<string>> bottles)
+        private static bool PuzzleSolved(List<Stack<string>> bottles, int bottleSize)
         {
             foreach(Stack<string> bottle in bottles)
             {
-                if (bottle.Count > 0 && !BottleContainsOneColor(bottle))
+                if (bottle.Count > 0 && !BottleFilledWithOneColor(bottle, bottleSize))
                 {
                     return false;
                 }
@@ -189,12 +200,18 @@ namespace WaterSorter
 
             if(possibleMoves.Count == 0)
             {
-                return PuzzleSolved(bottles);
+                return PuzzleSolved(bottles, bottleSize);
             }
 
             bool solved = false;
             foreach (Move move in possibleMoves)
             {
+                Move prevMove = LastItemOfList(moves);
+                if (prevMove != null && move.IsReverseOf(prevMove))
+                {
+                    continue;
+                }
+
                 Stack<string> fromBottle = bottles[move.FromIndex];
                 Stack<string> toBottle = bottles[move.ToIndex];
                 bool poured = PourBottle(fromBottle, toBottle, bottleSize);
