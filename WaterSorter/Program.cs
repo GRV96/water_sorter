@@ -3,21 +3,41 @@ using System.Collections.Generic;
 
 namespace WaterSorter
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            string puzzlePath = args[0];
-            string solutionPath = args[1];
+            int nbArgs = args.Length;
+            if (nbArgs < 1)
+            {
+                Console.WriteLine("Missing argument 1: the path to the puzzle.\n");
+                return;
+            }
 
-            Console.WriteLine("Puzzle: {0}", puzzlePath);
-            Console.WriteLine("Solution: {0}", solutionPath);
+            string puzzlePath = args[0];
 
             List<Stack<string>> bottles = FileIO.ReadPuzzle(puzzlePath);
             Console.WriteLine();
-            foreach(Stack<string> bottle in bottles)
+            foreach (Stack<string> bottle in bottles)
             {
                 Console.WriteLine(FileIO.BottleToLine(bottle));
+            }
+            Console.WriteLine();
+
+            List<Move> moves = Solver.SolvePuzzle(bottles, 4);
+
+            if (nbArgs < 2)
+            {
+                foreach (Move move in moves)
+                {
+                    Console.WriteLine(move);
+                }
+                Console.WriteLine();
+            }
+            else
+            {
+                string solutionPath = args[1];
+                FileIO.WriteSolution(solutionPath, bottles, moves);
             }
         }
     }

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace WaterSorter
 {
-    class FileIO
+    static class FileIO
     {
         private const char CH_SHARP = '#';
         private const string STR_DASH = "-";
@@ -16,15 +16,8 @@ namespace WaterSorter
                 return STR_DASH;
             }
 
-            Stack<string> bottleCopy = new Stack<string>(bottle);
-            List<string> colors = new List<string>();
-            while (bottleCopy.Count > 0)
-            {
-                colors.Insert(0, bottleCopy.Pop());
-            }
-
+            string[] colors = bottle.ToArray();
             string line = string.Join(STR_SPACE, colors);
-
             return line;
         }
 
@@ -66,6 +59,24 @@ namespace WaterSorter
             }
 
             return bottle;
+        }
+
+        public static void WriteSolution(string solutionPath, List<Stack<string>> bottles, List<Move> moves)
+        {
+            using (StreamWriter writer = new StreamWriter(solutionPath))
+            {
+                foreach(Stack<string> bottle in bottles)
+                {
+                    writer.WriteLine(BottleToLine(bottle));
+                }
+
+                writer.WriteLine();
+
+                foreach(Move move in moves)
+                {
+                    writer.WriteLine(move);
+                }
+            }
         }
     }
 }
