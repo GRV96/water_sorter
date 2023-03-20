@@ -155,7 +155,7 @@ namespace WaterSorter
             int pouredUnits = 0;
             int unitsToPour = movedLiquid.Count;
             Stack<string> reciever = null;
-            if(pouredUnits + toBottle.Count <= bottleSize)
+            if(unitsToPour + toBottle.Count <= bottleSize)
             {
                 reciever = toBottle;
                 pouredUnits = unitsToPour;
