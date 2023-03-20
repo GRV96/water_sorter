@@ -142,7 +142,7 @@ namespace WaterSorter
             return fromColor.Equals(toColor);
         }
 
-        private static bool PourBottle(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
+        private static int PourBottle(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
         {
             Stack<string> movedLiquid = new Stack<string>();
             string movedColor = null;
@@ -152,12 +152,13 @@ namespace WaterSorter
                 movedLiquid.Push(movedColor);
             } while (fromBottle.Count > 0 && fromBottle.Peek() == movedColor);
 
-            bool poured = false;
+            int pouredUnits = 0;
+            int unitsToPour = movedLiquid.Count;
             Stack<string> reciever = null;
-            if(movedLiquid.Count + toBottle.Count <= bottleSize)
+            if(pouredUnits + toBottle.Count <= bottleSize)
             {
                 reciever = toBottle;
-                poured = true;
+                pouredUnits = unitsToPour;
             }
             else
             {
@@ -170,7 +171,24 @@ namespace WaterSorter
                 reciever.Push(color);
             }
 
-            return poured;
+            return pouredUnits;
+        }
+
+        private static int PourBottle(
+            Stack<string> fromBottle, Stack<string> toBottle, int bottleSize, int nbUnits)
+        {
+            int pouredUnits = 0;
+
+            if(fromBottle.Count >= nbUnits && bottleSize - toBottle.Count >= nbUnits)
+            {
+                for (int i = 0; i < nbUnits; i++)
+                {
+                    toBottle.Push(fromBottle.Pop());
+                    pouredUnits++;
+                }
+            }
+
+            return pouredUnits;
         }
 
         private static bool PuzzleSolved(List<Stack<string>> bottles, int bottleSize)
@@ -214,8 +232,8 @@ namespace WaterSorter
 
                 Stack<string> fromBottle = bottles[move.FromIndex];
                 Stack<string> toBottle = bottles[move.ToIndex];
-                bool poured = PourBottle(fromBottle, toBottle, bottleSize);
-                if (!poured)
+                int pouredUnits = PourBottle(fromBottle, toBottle, bottleSize);
+                if (pouredUnits == 0)
                 {
                     continue;
                 }
@@ -230,6 +248,7 @@ namespace WaterSorter
                 else
                 {
                     moves.RemoveAt(moves.Count - 1);
+                    PourBottle(toBottle, fromBottle, bottleSize, pouredUnits);
                 }
             }
 
