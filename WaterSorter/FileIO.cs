@@ -60,5 +60,23 @@ namespace WaterSorter
 
             return bottle;
         }
+
+        public static void WriteSolution(string solutionPath, List<Stack<string>> bottles, List<Move> moves)
+        {
+            using (StreamWriter writer = new StreamWriter(solutionPath))
+            {
+                foreach(Stack<string> bottle in bottles)
+                {
+                    writer.WriteLine(BottleToLine(bottle));
+                }
+
+                writer.WriteLine();
+
+                foreach(Move move in moves)
+                {
+                    writer.WriteLine(move);
+                }
+            }
+        }
     }
 }

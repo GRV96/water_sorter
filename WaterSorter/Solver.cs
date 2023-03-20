@@ -66,6 +66,18 @@ namespace WaterSorter
             return true;
         }
 
+        private static List<Stack<string>> CopyBottles(List<Stack<string>> bottles)
+        {
+            List<Stack<string>> copiedBottles = new();
+
+            foreach(Stack<string> bottle in bottles)
+            {
+                copiedBottles.Add(new Stack<string>(new Stack<string>(bottle)));
+            }
+
+            return copiedBottles;
+        }
+
         private static List<Move> IdentifyPossibleMoves(List<Stack<string>> bottles, int bottleSize)
         {
             List<Move> possibleMoves = new List<Move>();
@@ -206,7 +218,7 @@ namespace WaterSorter
 
         public static List<Move> SolvePuzzle(List<Stack<string>> bottles, int bottleSize)
         {
-            bottles = new List<Stack<string>>(bottles);
+            bottles = CopyBottles(bottles);
             List<Move> moves = new List<Move>();
             TryMoves(bottles, moves, bottleSize);
             return moves;

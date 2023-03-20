@@ -26,6 +26,8 @@ namespace WaterSorter
             {
                 Console.WriteLine(move);
             }
+
+            FileIO.WriteSolution(solutionPath, bottles, moves);
         }
     }
 }
