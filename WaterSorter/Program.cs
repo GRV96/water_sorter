@@ -22,23 +22,28 @@ namespace WaterSorter
             {
                 Console.WriteLine(FileIO.BottleToLine(bottle));
             }
-            Console.WriteLine();
 
-            List<Move> moves = Solver.SolvePuzzle(bottles, 4);
+            List<Move[]> solutions = Solver.SolvePuzzle(bottles, 4);
 
             if (nbArgs < 2)
             {
-                foreach (Move move in moves)
+                foreach (Move[] solution in solutions)
                 {
-                    Console.WriteLine(move);
+                    Console.WriteLine($"\n{solution.Length} moves");
+
+                    foreach (Move move in solution)
+                    {
+                        Console.WriteLine(move);
+                    }
                 }
-                Console.WriteLine();
             }
             else
             {
                 string solutionPath = args[1];
-                FileIO.WriteSolution(solutionPath, bottles, moves);
+                FileIO.WriteSolutions(solutionPath, bottles, solutions);
             }
+
+            Console.WriteLine();
         }
     }
 }

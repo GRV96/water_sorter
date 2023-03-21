@@ -15,6 +15,11 @@ namespace WaterSorter
 
         public override bool Equals(object obj)
         {
+            if(obj == null)
+            {
+                return false;
+            }
+
             Move other = null;
             if(obj.GetType() == typeof(Move))
             {
@@ -44,12 +49,14 @@ namespace WaterSorter
         private List<Stack<string>> bottles = null;
         private int bottleSize = 0;
         private List<Move> moves = null;
+        private List<Move[]> solutions = null;
 
         private Solver(List<Stack<string>> bottles, int bottleSize)
         {
             this.bottles = CopyBottles(bottles);
             this.bottleSize = bottleSize;
             this.moves = new();
+            this.solutions = new();
         }
 
         private bool BottleFilledWithOneColor(Stack<string> bottle, bool requireFull)
@@ -71,6 +78,11 @@ namespace WaterSorter
             }
 
             return true;
+        }
+
+        private static int CompareArraysByLenght<T>(T[] array1, T[] array2)
+        {
+            return array1.Length - array2.Length;
         }
 
         private static List<Stack<string>> CopyBottles(List<Stack<string>> bottles)
@@ -222,23 +234,30 @@ namespace WaterSorter
             return true;
         }
 
-        public static List<Move> SolvePuzzle(List<Stack<string>> bottles, int bottleSize)
+        public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize)
         {
             Solver solver = new(bottles, bottleSize);
             solver.TryMoves();
-            return solver.moves;
+            solver.solutions.Sort(CompareArraysByLenght);
+            return solver.solutions;
         }
 
         private bool TryMoves()
         {
+            bool solved = false;
             List<Move> possibleMoves = IdentifyPossibleMoves();
 
             if(possibleMoves.Count == 0)
             {
-                return PuzzleSolved();
+                solved = PuzzleSolved();
+                if (solved)
+                {
+                    Move[] solution = moves.ToArray();
+                    solutions.Add(solution);
+                }
+                return solved;
             }
 
-            bool solved = false;
             foreach (Move move in possibleMoves)
             {
                 Move prevMove = LastItemOfList(moves);
@@ -252,6 +271,7 @@ namespace WaterSorter
                 int pouredUnits = PourBottle(fromBottle, toBottle);
                 if (pouredUnits == 0)
                 {
+                    // Pouring not allowed.
                     continue;
                 }
 
