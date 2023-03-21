@@ -2,7 +2,7 @@
 
 namespace WaterSorter
 {
-    public class Move
+    class Move
     {
         public int FromIndex { get; init; }
         public int ToIndex { get; init; }
