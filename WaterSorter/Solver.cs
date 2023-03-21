@@ -39,14 +39,23 @@ namespace WaterSorter
         }
     }
 
-    static class Solver
+    class Solver
     {
-        private static bool BottleFilledWithOneColor(Stack<string> bottle, int bottleSize=0)
+        private List<Stack<string>> bottles = null;
+        private int bottleSize = 0;
+        private List<Move> moves = null;
+
+        private Solver(List<Stack<string>> bottles, int bottleSize)
         {
-            if (bottleSize > 0 && bottle.Count < bottleSize)
+            this.bottles = CopyBottles(bottles);
+            this.bottleSize = bottleSize;
+            this.moves = new();
+        }
+
+        private bool BottleFilledWithOneColor(Stack<string> bottle, bool requireFull)
+        {
+            if (requireFull && bottle.Count < bottleSize)
             {
-                // Return false if the bottle is not full.
-                // To ignore this criteria, set bottleSize to 0 or less.
                 return false;
             }
 
@@ -76,7 +85,7 @@ namespace WaterSorter
             return copiedBottles;
         }
 
-        private static List<Move> IdentifyPossibleMoves(List<Stack<string>> bottles, int bottleSize)
+        private List<Move> IdentifyPossibleMoves()
         {
             List<Move> possibleMoves = new List<Move>();
 
@@ -94,7 +103,7 @@ namespace WaterSorter
 
                     Stack<string> bottleJ = bottles[j];
 
-                    if (MoveMakesSense(bottleI, bottleJ, bottleSize))
+                    if (MoveMakesSense(bottleI, bottleJ))
                     {
                         Move move = new Move(i, j);
                         Move prevMove = LastItemOfList(possibleMoves);
@@ -104,7 +113,7 @@ namespace WaterSorter
                         }
                     }
 
-                    if (MoveMakesSense(bottleJ, bottleI, bottleSize))
+                    if (MoveMakesSense(bottleJ, bottleI))
                     {
                         Move move = new Move(j, i);
                         Move prevMove = LastItemOfList(possibleMoves);
@@ -130,14 +139,14 @@ namespace WaterSorter
             return someList[nbItems - 1];
         }
 
-        private static bool MoveMakesSense(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
+        private bool MoveMakesSense(Stack<string> fromBottle, Stack<string> toBottle)
         {
             if (fromBottle.Count == 0 || toBottle.Count >= bottleSize)
             {
                 return false;
             }
 
-            if (toBottle.Count == 0 && BottleFilledWithOneColor(fromBottle))
+            if (toBottle.Count == 0 && BottleFilledWithOneColor(fromBottle, false))
             {
                 return false;
             }
@@ -152,7 +161,7 @@ namespace WaterSorter
             return fromColor.Equals(toColor);
         }
 
-        private static int PourBottle(Stack<string> fromBottle, Stack<string> toBottle, int bottleSize)
+        private int PourBottle(Stack<string> fromBottle, Stack<string> toBottle)
         {
             Stack<string> movedLiquid = new Stack<string>();
             string movedColor = null;
@@ -184,8 +193,7 @@ namespace WaterSorter
             return pouredUnits;
         }
 
-        private static int PourBottle(
-            Stack<string> fromBottle, Stack<string> toBottle, int bottleSize, int nbUnits)
+        private int PourBottle(Stack<string> fromBottle, Stack<string> toBottle, int nbUnits)
         {
             int pouredUnits = 0;
 
@@ -201,11 +209,11 @@ namespace WaterSorter
             return pouredUnits;
         }
 
-        private static bool PuzzleSolved(List<Stack<string>> bottles, int bottleSize)
+        private bool PuzzleSolved()
         {
             foreach(Stack<string> bottle in bottles)
             {
-                if (bottle.Count > 0 && !BottleFilledWithOneColor(bottle, bottleSize))
+                if (bottle.Count > 0 && !BottleFilledWithOneColor(bottle, true))
                 {
                     return false;
                 }
@@ -216,19 +224,18 @@ namespace WaterSorter
 
         public static List<Move> SolvePuzzle(List<Stack<string>> bottles, int bottleSize)
         {
-            bottles = CopyBottles(bottles);
-            List<Move> moves = new List<Move>();
-            TryMoves(bottles, moves, bottleSize);
-            return moves;
+            Solver solver = new(bottles, bottleSize);
+            solver.TryMoves();
+            return solver.moves;
         }
 
-        private static bool TryMoves(List<Stack<string>> bottles, List<Move> moves, int bottleSize)
+        private bool TryMoves()
         {
-            List<Move> possibleMoves = IdentifyPossibleMoves(bottles, bottleSize);
+            List<Move> possibleMoves = IdentifyPossibleMoves();
 
             if(possibleMoves.Count == 0)
             {
-                return PuzzleSolved(bottles, bottleSize);
+                return PuzzleSolved();
             }
 
             bool solved = false;
@@ -242,14 +249,14 @@ namespace WaterSorter
 
                 Stack<string> fromBottle = bottles[move.FromIndex];
                 Stack<string> toBottle = bottles[move.ToIndex];
-                int pouredUnits = PourBottle(fromBottle, toBottle, bottleSize);
+                int pouredUnits = PourBottle(fromBottle, toBottle);
                 if (pouredUnits == 0)
                 {
                     continue;
                 }
 
                 moves.Add(move);
-                solved = TryMoves(bottles, moves, bottleSize);
+                solved = TryMoves();
 
                 if (solved)
                 {
@@ -258,7 +265,7 @@ namespace WaterSorter
                 else
                 {
                     moves.RemoveAt(moves.Count - 1);
-                    PourBottle(toBottle, fromBottle, bottleSize, pouredUnits);
+                    PourBottle(toBottle, fromBottle, pouredUnits);
                 }
             }
 
