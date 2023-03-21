@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WaterSorter
 {
@@ -47,7 +45,7 @@ namespace WaterSorter
         {
             if (bottleSize > 0 && bottle.Count < bottleSize)
             {
-                // Return false if the bottle is not filled.
+                // Return false if the bottle is not full.
                 // To ignore this criteria, set bottleSize to 0 or less.
                 return false;
             }
