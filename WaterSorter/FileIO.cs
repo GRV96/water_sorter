@@ -21,6 +21,23 @@ namespace WaterSorter
             return line;
         }
 
+        private static Stack<string> ParsePuzzleLine(string puzzleLine)
+        {
+            Stack<string> bottle = new Stack<string>();
+
+            if (puzzleLine != STR_DASH)
+            {
+                string[] colors = puzzleLine.Split(STR_SPACE);
+
+                for (int i = colors.Length - 1; i >= 0; i--)
+                {
+                    bottle.Push(colors[i]);
+                }
+            }
+
+            return bottle;
+        }
+
         public static List<Stack<string>> ReadPuzzle(string puzzlePath)
         {
             List<Stack<string>> bottles = new List<Stack<string>>();
@@ -42,23 +59,6 @@ namespace WaterSorter
             }
 
             return bottles;
-        }
-
-        private static Stack<string> ParsePuzzleLine(string puzzleLine)
-        {
-            Stack<string> bottle = new Stack<string>();
-
-            if (puzzleLine != STR_DASH)
-            {
-                string[] colors = puzzleLine.Split(STR_SPACE);
-
-                for (int i = colors.Length - 1; i >= 0; i--)
-                {
-                    bottle.Push(colors[i]);
-                }
-            }
-
-            return bottle;
         }
 
         public static void WriteSolutions(
