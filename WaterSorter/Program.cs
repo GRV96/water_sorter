@@ -23,7 +23,7 @@ namespace WaterSorter
                 Console.WriteLine(FileIO.BottleToLine(bottle));
             }
 
-            List<Move[]> solutions = Solver.SolvePuzzle(bottles, 4);
+            List<Move[]> solutions = Solver.SolvePuzzle(bottles, 4, 20);
 
             if (nbArgs < 2)
             {

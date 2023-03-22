@@ -234,12 +234,17 @@ namespace WaterSorter
             return true;
         }
 
-        public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize)
+        public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize, int nbSolutions)
         {
             Solver solver = new(bottles, bottleSize);
             solver.TryMoves();
-            solver.solutions.Sort(CompareArraysByLenght);
-            return solver.solutions;
+            List<Move[]> solutions = solver.solutions;
+            solutions.Sort(CompareArraysByLenght);
+            if(solutions.Count > nbSolutions)
+            {
+                solutions = solutions.GetRange(0, nbSolutions);
+            }
+            return solutions;
         }
 
         private void TryMoves()
