@@ -242,20 +242,24 @@ namespace WaterSorter
             return solver.solutions;
         }
 
-        private bool TryMoves()
+        private void TryMoves()
         {
-            bool solved = false;
+            if(solutions.Count >= 20)
+            {
+                // Level 5 has enough solutions to fill a 4.55 GB file!
+                return;
+            }
             List<Move> possibleMoves = IdentifyPossibleMoves();
 
             if(possibleMoves.Count == 0)
             {
-                solved = PuzzleSolved();
+                bool solved = PuzzleSolved();
                 if (solved)
                 {
                     Move[] solution = moves.ToArray();
                     solutions.Add(solution);
                 }
-                return solved;
+                return;
             }
 
             Move prevMove = LastItemOfList(moves);
@@ -276,20 +280,12 @@ namespace WaterSorter
                 }
 
                 moves.Add(move);
-                solved = TryMoves();
-
-                if (solved)
-                {
-                    break;
-                }
-                else
-                {
-                    moves.RemoveAt(moves.Count - 1);
-                    PourBottle(toBottle, fromBottle, pouredUnits);
-                }
+                TryMoves();
+                moves.RemoveAt(moves.Count - 1);
+                PourBottle(toBottle, fromBottle, pouredUnits);
             }
 
-            return solved;
+            return;
         }
     }
 }
