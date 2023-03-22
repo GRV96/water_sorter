@@ -249,11 +249,6 @@ namespace WaterSorter
 
         private void TryMoves()
         {
-            if(solutions.Count >= 20)
-            {
-                // Level 5 has enough solutions to fill a 4.55 GB file!
-                return;
-            }
             List<Move> possibleMoves = IdentifyPossibleMoves();
 
             if(possibleMoves.Count == 0)
