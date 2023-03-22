@@ -258,9 +258,9 @@ namespace WaterSorter
                 return solved;
             }
 
+            Move prevMove = LastItemOfList(moves);
             foreach (Move move in possibleMoves)
             {
-                Move prevMove = LastItemOfList(moves);
                 if (prevMove != null && move.IsReverseOf(prevMove))
                 {
                     continue;
