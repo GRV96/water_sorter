@@ -237,13 +237,9 @@ namespace WaterSorter
         public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize, int nbSolutions)
         {
             Solver solver = new(bottles, bottleSize);
-            solver.TryMoves(200);
+            solver.TryMoves(nbSolutions);
             List<Move[]> solutions = solver.solutions;
             solutions.Sort(CompareArraysByLenght);
-            if(solutions.Count > nbSolutions)
-            {
-                solutions = solutions.GetRange(0, nbSolutions);
-            }
             return solutions;
         }
 
