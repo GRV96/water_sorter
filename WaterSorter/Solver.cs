@@ -234,7 +234,7 @@ namespace WaterSorter
             return true;
         }
 
-        public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize, int nbSolutions)
+        public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize, int nbSolutions = 0)
         {
             Solver solver = new(bottles, bottleSize);
             solver.TryMoves(nbSolutions);
@@ -245,7 +245,7 @@ namespace WaterSorter
 
         private void TryMoves(int nbSolutions)
         {
-            if(solutions.Count >= nbSolutions)
+            if(nbSolutions > 0 && solutions.Count >= nbSolutions)
             {
                 return;
             }
