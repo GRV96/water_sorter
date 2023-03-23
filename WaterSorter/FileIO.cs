@@ -3,7 +3,7 @@ using System.IO;
 
 namespace WaterSorter
 {
-    delegate void WriteALine(object value);
+    delegate void ProcessObjNoReturn(object value);
 
     static class FileIO
     {
@@ -63,7 +63,7 @@ namespace WaterSorter
             return bottles;
         }
 
-        public static void WriteBottles(List<Stack<string>> bottles, WriteALine writerFnc)
+        public static void WriteBottles(List<Stack<string>> bottles, ProcessObjNoReturn writerFnc)
         {
             foreach (Stack<string> bottle in bottles)
             {
@@ -81,7 +81,7 @@ namespace WaterSorter
             }
         }
 
-        public static void WriteSolutions(List<Move[]> solutions, WriteALine writerFnc)
+        public static void WriteSolutions(List<Move[]> solutions, ProcessObjNoReturn writerFnc)
         {
             int solutionIndex = 0;
             foreach (Move[] solution in solutions)
