@@ -21,6 +21,23 @@ namespace WaterSorter
             return line;
         }
 
+        private static Stack<string> ParsePuzzleLine(string puzzleLine)
+        {
+            Stack<string> bottle = new Stack<string>();
+
+            if (puzzleLine != STR_DASH)
+            {
+                string[] colors = puzzleLine.Split(STR_SPACE);
+
+                for (int i = colors.Length - 1; i >= 0; i--)
+                {
+                    bottle.Push(colors[i]);
+                }
+            }
+
+            return bottle;
+        }
+
         public static List<Stack<string>> ReadPuzzle(string puzzlePath)
         {
             List<Stack<string>> bottles = new List<Stack<string>>();
@@ -44,24 +61,8 @@ namespace WaterSorter
             return bottles;
         }
 
-        private static Stack<string> ParsePuzzleLine(string puzzleLine)
-        {
-            Stack<string> bottle = new Stack<string>();
-
-            if (puzzleLine != STR_DASH)
-            {
-                string[] colors = puzzleLine.Split(STR_SPACE);
-
-                for (int i = colors.Length - 1; i >= 0; i--)
-                {
-                    bottle.Push(colors[i]);
-                }
-            }
-
-            return bottle;
-        }
-
-        public static void WriteSolution(string solutionPath, List<Stack<string>> bottles, List<Move> moves)
+        public static void WriteSolutions(
+            string solutionPath, List<Stack<string>> bottles, List<Move[]> solutions)
         {
             using (StreamWriter writer = new StreamWriter(solutionPath))
             {
@@ -70,11 +71,17 @@ namespace WaterSorter
                     writer.WriteLine(BottleToLine(bottle));
                 }
 
-                writer.WriteLine();
-
-                foreach(Move move in moves)
+                int solutionIndex = 0;
+                foreach (Move[] solution in solutions)
                 {
-                    writer.WriteLine(move);
+                    writer.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
+
+                    foreach (Move move in solution)
+                    {
+                        writer.WriteLine(move);
+                    }
+
+                    solutionIndex++;
                 }
             }
         }

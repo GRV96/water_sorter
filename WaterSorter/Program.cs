@@ -10,7 +10,7 @@ namespace WaterSorter
             int nbArgs = args.Length;
             if (nbArgs < 1)
             {
-                Console.WriteLine("Missing argument 1: the path to the puzzle.\n");
+                Console.WriteLine("Missing argument 0: the path to the puzzle.\n");
                 return;
             }
 
@@ -22,23 +22,37 @@ namespace WaterSorter
             {
                 Console.WriteLine(FileIO.BottleToLine(bottle));
             }
-            Console.WriteLine();
 
-            List<Move> moves = Solver.SolvePuzzle(bottles, 4);
-
-            if (nbArgs < 2)
+            int nbSolutions = 0;
+            if(nbArgs >= 2)
             {
-                foreach (Move move in moves)
+               int.TryParse(args[1], out nbSolutions);
+            }
+
+            List<Move[]> solutions = Solver.SolvePuzzle(bottles, 4, nbSolutions);
+
+            if (nbArgs < 3)
+            {
+                int solutionIndex = 0;
+                foreach (Move[] solution in solutions)
                 {
-                    Console.WriteLine(move);
+                    Console.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
+
+                    foreach (Move move in solution)
+                    {
+                        Console.WriteLine(move);
+                    }
+
+                    solutionIndex++;
                 }
-                Console.WriteLine();
             }
             else
             {
-                string solutionPath = args[1];
-                FileIO.WriteSolution(solutionPath, bottles, moves);
+                string solutionPath = args[2];
+                FileIO.WriteSolutions(solutionPath, bottles, solutions);
             }
+
+            Console.WriteLine();
         }
     }
 }
