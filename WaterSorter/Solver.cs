@@ -237,7 +237,7 @@ namespace WaterSorter
         public static List<Move[]> SolvePuzzle(List<Stack<string>> bottles, int bottleSize, int nbSolutions)
         {
             Solver solver = new(bottles, bottleSize);
-            solver.TryMoves();
+            solver.TryMoves(200);
             List<Move[]> solutions = solver.solutions;
             solutions.Sort(CompareArraysByLenght);
             if(solutions.Count > nbSolutions)
@@ -247,8 +247,13 @@ namespace WaterSorter
             return solutions;
         }
 
-        private void TryMoves()
+        private void TryMoves(int nbSolutions)
         {
+            if(solutions.Count >= nbSolutions)
+            {
+                return;
+            }
+
             List<Move> possibleMoves = IdentifyPossibleMoves();
 
             if(possibleMoves.Count == 0)
@@ -280,7 +285,7 @@ namespace WaterSorter
                 }
 
                 moves.Add(move);
-                TryMoves();
+                TryMoves(nbSolutions);
                 moves.RemoveAt(moves.Count - 1);
                 PourBottle(toBottle, fromBottle, pouredUnits);
             }
