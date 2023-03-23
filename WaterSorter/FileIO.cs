@@ -3,6 +3,8 @@ using System.IO;
 
 namespace WaterSorter
 {
+    delegate void WriteALine(object value);
+
     static class FileIO
     {
         private const char CH_SHARP = '#';
@@ -61,28 +63,37 @@ namespace WaterSorter
             return bottles;
         }
 
-        public static void WriteSolutions(
+        public static void WriteBottles(List<Stack<string>> bottles, WriteALine writerFnc)
+        {
+            foreach (Stack<string> bottle in bottles)
+            {
+                writerFnc(BottleToLine(bottle));
+            }
+        }
+
+        public static void WritePuzzleAndSolutions(
             string solutionPath, List<Stack<string>> bottles, List<Move[]> solutions)
         {
             using (StreamWriter writer = new StreamWriter(solutionPath))
             {
-                foreach(Stack<string> bottle in bottles)
+                WriteBottles(bottles, writer.WriteLine);
+                WriteSolutions(solutions, writer.WriteLine);
+            }
+        }
+
+        public static void WriteSolutions(List<Move[]> solutions, WriteALine writerFnc)
+        {
+            int solutionIndex = 0;
+            foreach (Move[] solution in solutions)
+            {
+                writerFnc($"\n[{solutionIndex}] {solution.Length} moves");
+
+                foreach (Move move in solution)
                 {
-                    writer.WriteLine(BottleToLine(bottle));
+                    writerFnc(move);
                 }
 
-                int solutionIndex = 0;
-                foreach (Move[] solution in solutions)
-                {
-                    writer.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
-
-                    foreach (Move move in solution)
-                    {
-                        writer.WriteLine(move);
-                    }
-
-                    solutionIndex++;
-                }
+                solutionIndex++;
             }
         }
     }
