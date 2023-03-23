@@ -24,7 +24,7 @@ namespace WaterSorter
             }
 
             int nbSolutions = 0;
-            if(nbArgs < 2)
+            if(nbArgs >= 2)
             {
                int.TryParse(args[1], out nbSolutions);
             }
@@ -33,14 +33,17 @@ namespace WaterSorter
 
             if (nbArgs < 3)
             {
+                int solutionIndex = 0;
                 foreach (Move[] solution in solutions)
                 {
-                    Console.WriteLine($"\n{solution.Length} moves");
+                    Console.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
 
                     foreach (Move move in solution)
                     {
                         Console.WriteLine(move);
                     }
+
+                    solutionIndex++;
                 }
             }
             else

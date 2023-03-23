@@ -71,14 +71,17 @@ namespace WaterSorter
                     writer.WriteLine(BottleToLine(bottle));
                 }
 
-                foreach(Move[] solution in solutions)
+                int solutionIndex = 0;
+                foreach (Move[] solution in solutions)
                 {
-                    writer.WriteLine($"\n{solution.Length} moves");
+                    writer.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
 
                     foreach (Move move in solution)
                     {
                         writer.WriteLine(move);
                     }
+
+                    solutionIndex++;
                 }
             }
         }
