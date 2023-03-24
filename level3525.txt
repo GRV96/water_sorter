@@ -1,22 +1,22 @@
 # DB: dark blue
+# DP: dark purple
 # Gy: grey
 # LB: light blue
-# LG: light green
 # LP: light purple
 # Or: orange
-# Pu: purple
 # Re: red
+# Tu: truquoise
 # Ye: yellow
 # -: empty bottle
 
-Pu LB Pu Re
+DP LB DP Re
 LP LB LB Ye
-LG Gy DB Or
+Tu Gy DB Or
 Ye Gy Ye Or
-DB LG LG Pu
-Or LG DB DB
+DB Tu Tu DP
+Or Tu DB DB
 LP Or Gy LB
-Pu Re Ye LP
+DP Re Ye LP
 Re Gy Re LP
 -
 -

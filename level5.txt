@@ -1,16 +1,16 @@
 ﻿# Example source: https://www.silvergames.com/en/water-sort
 
 # DB: dark blue
-# LG: light green
 # Or: orange
 # Pi: pink
 # Re: red
+# Tu: truquoise
 # -: empty bottle
 
-Pi DB LG Or
+Pi DB Tu Or
 Re Or Re Pi
-DB Re LG LG
-Pi DB Or LG
+DB Re Tu Tu
+Pi DB Or Tu
 
 # Empty lines are ignored
 
