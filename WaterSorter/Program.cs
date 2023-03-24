@@ -18,10 +18,7 @@ namespace WaterSorter
 
             List<Stack<string>> bottles = FileIO.ReadPuzzle(puzzlePath);
             Console.WriteLine();
-            foreach (Stack<string> bottle in bottles)
-            {
-                Console.WriteLine(FileIO.BottleToLine(bottle));
-            }
+            FileIO.WriteBottles(bottles, Console.WriteLine);
 
             int nbSolutions = 0;
             if(nbArgs >= 2)
@@ -33,23 +30,12 @@ namespace WaterSorter
 
             if (nbArgs < 3)
             {
-                int solutionIndex = 0;
-                foreach (Move[] solution in solutions)
-                {
-                    Console.WriteLine($"\n[{solutionIndex}] {solution.Length} moves");
-
-                    foreach (Move move in solution)
-                    {
-                        Console.WriteLine(move);
-                    }
-
-                    solutionIndex++;
-                }
+                FileIO.WriteSolutions(solutions, Console.WriteLine);
             }
             else
             {
                 string solutionPath = args[2];
-                FileIO.WriteSolutions(solutionPath, bottles, solutions);
+                FileIO.WritePuzzleAndSolutions(solutionPath, bottles, solutions);
             }
 
             Console.WriteLine();
