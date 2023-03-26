@@ -23,6 +23,8 @@ Exemple:
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\esssai.txt
 ```
 
+[Source](https://www.silvergames.com/en/water-sort) de l'image du niveau 5
+
 ## English
 
 This command line application solves water sorting puzzles. First, represent a
@@ -43,3 +45,5 @@ Example:
 ```
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\test.txt
 ```
+
+[Source](https://www.silvergames.com/en/water-sort) of the level 5 picture
