@@ -23,7 +23,7 @@ This command line application solves water sorting puzzles. First, represent a
 puzzle as in the example files at the repository's root. Then, find the
 executable in the `/bin` folder and run it with the following arguments.
 
-**1**: the path to the file that represents the problem.
+**1**: the path to the file that represents the puzzle.
 
 **2 (optional)**: the number of solutions found. This number will be unlimited
 if the argument is omitted or less than or equal to 0. The more solutions the
