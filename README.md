@@ -9,15 +9,15 @@ le dossier `/bin` et lancez-le avec les arguments suivants.
 
 **1**: le chemin du fichier qui représente le problème.
 
-**2 (optionel)**: le nombre de solutions trouvées. Ce nombre sera illimité si
+**2 (optionnel)**: le nombre de solutions trouvées. Ce nombre sera illimité si
 l'argument est omis ou s'il vaut 0 ou moins. Plus l'algorithme cherchera de
 solutions, plus son exécution sera longue.
 
-**3 (optionel)**: le chemin du fichier de sortie, où les solutions seront
+**3 (optionnel)**: le chemin du fichier de sortie, où les solutions seront
 enregistrées. Si aucun chemin n'est indiqué, la console affichera les
 solutions.
 
-## Englsih
+## English
 
 This command line application solves water sorting puzzles. First, represent a
 puzzle as in the example files at the repository's root. Then, find the
