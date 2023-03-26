@@ -17,6 +17,12 @@ l'algorithme sera très longue.
 enregistrées. Si aucun chemin n'est indiqué, la console affichera les
 solutions.
 
+Exemple:
+
+```
+.\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\esssai.txt
+```
+
 ## English
 
 This command line application solves water sorting puzzles. First, represent a
@@ -31,3 +37,9 @@ algorithm's execution will be very long.
 
 **3 (optional)**: the path to the output file, where the solutions will be
 recorded. If no path is provided, the console will display the solutions.
+
+Example:
+
+```
+.\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\test.txt
+```
