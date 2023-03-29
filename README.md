@@ -14,8 +14,7 @@ l'argument est omis ou s'il vaut 0 ou moins. Dans ce cas, l'exécution de
 l'algorithme sera très longue.
 
 **3 (optionnel)**: le chemin du fichier de sortie, où les solutions seront
-enregistrées. Si aucun chemin n'est indiqué, la console affichera les
-solutions.
+écrites. Si aucun chemin n'est indiqué, la console affichera les solutions.
 
 Exemple:
 
@@ -64,7 +63,7 @@ if the argument is omitted or less than or equal to 0. In that case, the
 algorithm's execution will be very long.
 
 **3 (optional)**: the path to the output file, where the solutions will be
-recorded. If no path is provided, the console will display the solutions.
+written. If no path is provided, the console will display the solutions.
 
 Example:
 
@@ -91,7 +90,7 @@ line.
 
 	* The colors are separated by spaces.
 
-	* Hyphens (`-`) represent an empty test tube.
+	* A hyphen (`-`) represents an empty test tube.
 
 * Empty lines are ignored.
 
