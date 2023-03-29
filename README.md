@@ -23,6 +23,32 @@ Exemple:
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\esssai.txt
 ```
 
+### Représentation des problèmes
+
+* Un problème de tri de liquide comporte plusieurs éprouvettes contenant des
+unités de liquide de couleurs différentes.
+
+* Dans un fichier texte, écrivez sur une même ligne les couleurs contenues
+dans chaque éprouvette.
+
+	* Une éprouvette peut contenir quatre unités de liquide.
+
+	* Une ligne représente une éprouvette.
+
+	* La première couleur sur une ligne est en haut de l'éprouvette; la
+	dernière couleur est au fond.
+
+	* Dans un problème, chaque chaîne de caractères correspond à exactement une
+	couleur.
+
+	* Les couleurs sont séparées par des espaces.
+
+	* Le tiret (`-`) représente une éprouvette vide.
+
+* Les lignes vides sont ignorées.
+
+* Les commentaires commencent par `#`.
+
 [Source](https://www.silvergames.com/en/water-sort) de l'image du niveau 5
 
 ## English
@@ -45,5 +71,30 @@ Example:
 ```
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\test.txt
 ```
+
+### Puzzle Representation
+
+* A water sorting puzzle consists in several test tubes containing liquid units
+of different colors.
+
+* In a text file, write the colors contained in each test tube on the same
+line.
+
+	* A test tube can contain four liquid units.
+
+	* A line represents one test tube.
+
+	* The first color on a line is at the top of a test tube; the last color is
+	at the bottom.
+
+	* In a puzzle, each character string corresponds to exactly one color.
+
+	* The colors are separated by spaces.
+
+	* Hyphens (`-`) represent an empty test tube.
+
+* Empty lines are ignored.
+
+* Comments start with `#`.
 
 [Source](https://www.silvergames.com/en/water-sort) of the level 5 picture
