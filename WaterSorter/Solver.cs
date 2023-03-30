@@ -285,8 +285,6 @@ namespace WaterSorter
                 moves.RemoveAt(moves.Count - 1);
                 PourBottle(toBottle, fromBottle, pouredUnits);
             }
-
-            return;
         }
     }
 }
