@@ -37,6 +37,9 @@ unités de liquide de couleurs différentes.
 * Dans un fichier texte, écrivez sur une même ligne les couleurs contenues
 dans chaque éprouvette.
 
+	* L'ordre des éprouvettes doit être le même dans le problème et sa
+	représentation.
+
 	* Une éprouvette peut contenir quatre unités de liquide.
 
 	* Une ligne représente une éprouvette.
@@ -97,6 +100,8 @@ of different colors.
 
 * In a text file, write the colors contained in each test tube on the same
 line.
+
+	* The test tube order in the text file must be the same as in the puzzle.
 
 	* A test tube can contain four liquid units.
 
