@@ -50,6 +50,8 @@ namespace WaterSorter
 
                 while ((line = reader.ReadLine()) != null)
                 {
+                    line = line.Trim();
+
                     if (line.Length == 0 || line[0] == CH_SHARP)
                     {
                         continue;
