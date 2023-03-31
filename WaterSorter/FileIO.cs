@@ -33,7 +33,11 @@ namespace WaterSorter
 
                 for (int i = colors.Length - 1; i >= 0; i--)
                 {
-                    bottle.Push(colors[i]);
+                    string color = colors[i];
+                    if (color.Length > 0)
+                    {
+                        bottle.Push(color);
+                    }
                 }
             }
 
@@ -50,7 +54,20 @@ namespace WaterSorter
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    if (line.Length == 0 || line[0] == CH_SHARP)
+                    line = line.Trim();
+                    int commentIndex = line.IndexOf(CH_SHARP);
+
+                    if (commentIndex == 0)
+                    {
+                        continue;
+                    }
+                    else if(commentIndex > 0)
+                    {
+                        line = line.Substring(0, commentIndex);
+                        line = line.Trim();
+                    }
+
+                    if (line.Length == 0)
                     {
                         continue;
                     }
