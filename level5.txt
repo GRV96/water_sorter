@@ -8,12 +8,12 @@
 # -: empty bottle
 
 Pi DB Tu Or # Comment at the end of a line
-Re Or  Re Pi
+Re Or Re Pi
 DB Re Tu Tu
 Pi DB Or Tu
 
 # Empty lines are ignored
 
 DB Re Pi Or
- -
-- 
+-
+-
