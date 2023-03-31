@@ -22,6 +22,13 @@ Exemple:
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\esssai.txt
 ```
 
+[Source](https://www.silvergames.com/en/water-sort) de l'image du niveau 5
+
+### Ordre des éprouvettes
+
+L'application ordonne les éprouvettes de gauche à droite, de haut en bas. Elle
+leur attribue un indice commençant à 0 comme l'illustre l'image du niveau 5.
+
 ### Représentation des problèmes
 
 * Un problème de tri de liquide comporte plusieurs éprouvettes contenant des
@@ -48,7 +55,12 @@ dans chaque éprouvette.
 
 * Les commentaires commencent par `#`.
 
-[Source](https://www.silvergames.com/en/water-sort) de l'image du niveau 5
+### Solutions
+
+Une solution est une série de versements de liquide d'une éprouvette à une
+autre arpès lesquels toutes les unités de liquide de même couleur sont dans la
+même éprouvette. Les instructions de versement identifient les éprouvettes par
+leur indice.
 
 ## English
 
@@ -70,6 +82,13 @@ Example:
 ```
 .\WaterSorter.exe ...\water_sorter\level5.txt 20 ...\water_sorter\test.txt
 ```
+
+[Source](https://www.silvergames.com/en/water-sort) of the level 5 picture
+
+### Test Tube Order
+
+The application orders the test tubes from left to right, from top to bottom.
+It assigns them indices starting at 0 as shown in the level 5 picture.
 
 ### Puzzle Representation
 
@@ -96,4 +115,8 @@ line.
 
 * Comments start with `#`.
 
-[Source](https://www.silvergames.com/en/water-sort) of the level 5 picture
+### Solutions
+
+A solution is a series of pourings from a test tube to another resulting in all
+liquid units of the same color being in the same tube. The pouring instructions
+identify the test tubes by their index.
