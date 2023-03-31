@@ -33,7 +33,11 @@ namespace WaterSorter
 
                 for (int i = colors.Length - 1; i >= 0; i--)
                 {
-                    bottle.Push(colors[i]);
+                    string color = colors[i];
+                    if (color.Length > 0)
+                    {
+                        bottle.Push(color);
+                    }
                 }
             }
 
