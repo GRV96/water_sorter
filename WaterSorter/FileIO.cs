@@ -51,8 +51,19 @@ namespace WaterSorter
                 while ((line = reader.ReadLine()) != null)
                 {
                     line = line.Trim();
+                    int commentIndex = line.IndexOf(CH_SHARP);
 
-                    if (line.Length == 0 || line[0] == CH_SHARP)
+                    if (commentIndex == 0)
+                    {
+                        continue;
+                    }
+                    else if(commentIndex > 0)
+                    {
+                        line = line.Substring(0, commentIndex);
+                        line = line.Trim();
+                    }
+
+                    if (line.Length == 0)
                     {
                         continue;
                     }

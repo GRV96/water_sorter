@@ -7,7 +7,7 @@
 # Tu: truquoise
 # -: empty bottle
 
-Pi DB Tu Or
+Pi DB Tu Or # Comment at the end of a line
 Re Or Re Pi
 DB Re Tu Tu
 Pi DB Or Tu
