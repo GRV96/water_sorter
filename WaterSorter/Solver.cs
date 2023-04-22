@@ -115,9 +115,9 @@ namespace WaterSorter
 
                     Stack<string> bottleJ = bottles[j];
 
-                    if (MoveMakesSense(bottleI, bottleJ))
+                    if (MoveMakesSense(bottleJ, bottleI))
                     {
-                        Move move = new Move(i, j);
+                        Move move = new Move(j, i);
                         Move prevMove = LastItemOfList(possibleMoves);
                         if (prevMove == null || !move.IsReverseOf(prevMove))
                         {
@@ -125,9 +125,9 @@ namespace WaterSorter
                         }
                     }
 
-                    if (MoveMakesSense(bottleJ, bottleI))
+                    if (MoveMakesSense(bottleI, bottleJ))
                     {
-                        Move move = new Move(j, i);
+                        Move move = new Move(i, j);
                         Move prevMove = LastItemOfList(possibleMoves);
                         if (prevMove == null || !move.IsReverseOf(prevMove))
                         {
