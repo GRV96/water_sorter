@@ -38,7 +38,7 @@ namespace WaterSorter
             return true;
         }
 
-        private static int CompareArraysByLenght<T>(T[] array1, T[] array2)
+        private static int CompareArraysByLength<T>(T[] array1, T[] array2)
         {
             return array1.Length - array2.Length;
         }
@@ -197,7 +197,7 @@ namespace WaterSorter
             Solver solver = new(bottles, bottleSize);
             solver.TryMoves(nbSolutions);
             List<Move[]> solutions = solver.solutions;
-            solutions.Sort(CompareArraysByLenght);
+            solutions.Sort(CompareArraysByLength);
             return solutions;
         }
 
