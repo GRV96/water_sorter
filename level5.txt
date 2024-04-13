@@ -4,7 +4,7 @@
 # Or: orange
 # Pi: pink
 # Re: red
-# Tu: truquoise
+# Tu: turquoise
 # -: empty bottle
 
 Pi DB Tu Or # Comment at the end of a line

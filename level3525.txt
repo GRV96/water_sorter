@@ -5,7 +5,7 @@
 # LP: light purple
 # Or: orange
 # Re: red
-# Tu: truquoise
+# Tu: turquoise
 # Ye: yellow
 # -: empty bottle
 

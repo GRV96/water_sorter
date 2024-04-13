@@ -8,7 +8,7 @@
 # Or: orange
 # Pi: pink
 # Re: red
-# Tu: truquoise
+# Tu: turquoise
 # Ye: yellow
 # -: empty bottle
 
